@@ -75,5 +75,11 @@ export function getCvByType(type: string | RegExp): CvEntry[] {
       typeof type === "string" ? e.type === type : type.test(e.type),
     )
     .filter((e) => e.website !== "n")
-    .sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""));
+    .sort((a, b) => {
+      // Ongoing roles ("… — present") first, then by start date descending
+      const aPresent = a.dateEnd === "present" ? 1 : 0;
+      const bPresent = b.dateEnd === "present" ? 1 : 0;
+      if (aPresent !== bPresent) return bPresent - aPresent;
+      return (b.date ?? "").localeCompare(a.date ?? "");
+    });
 }

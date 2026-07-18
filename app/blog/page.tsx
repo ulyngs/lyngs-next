@@ -28,7 +28,6 @@ export default function BlogPage() {
   return (
     <div className="mx-auto max-w-5xl px-5 pt-8 pb-12 md:px-8 md:pt-10 md:pb-16">
       <PageHeader
-        eyebrow="Writing"
         title="Blog"
         description="Notes on digital self-control, reproducible research, and practical tooling."
       />
@@ -38,19 +37,22 @@ export default function BlogPage() {
           {posts.map((post) => (
             <article
               key={post.slug}
-              className="grid gap-4 rounded-2xl border border-border bg-white p-4 transition hover:border-teal/40 sm:grid-cols-[160px_1fr] sm:p-5"
+              className="grid gap-4 rounded-2xl border border-border bg-white p-4 transition hover:border-teal/40 sm:grid-cols-[200px_1fr] sm:items-start sm:p-5"
             >
               {post.teaser ? (
-                <Link href={postPath(post)} className="block overflow-hidden rounded-xl">
+                <Link
+                  href={postPath(post)}
+                  className="block overflow-hidden rounded-xl"
+                >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={post.teaser}
                     alt=""
-                    className="aspect-[4/3] h-full w-full object-cover"
+                    className="aspect-[3/2] w-full object-cover"
                   />
                 </Link>
               ) : (
-                <div className="rounded-xl bg-warmGrey" />
+                <div className="aspect-[3/2] rounded-xl bg-warmGrey" />
               )}
               <div>
                 <p className="text-xs text-muted">{formatPostDate(post.date)}</p>

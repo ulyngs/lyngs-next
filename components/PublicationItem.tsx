@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Publication } from "@/lib/publications";
+import { InlineMarkdown } from "@/lib/inline-markdown";
 
 function highlightAuthor(authors: string) {
   return authors.replace(
@@ -12,7 +13,6 @@ function highlightAuthor(authors: string) {
 
 export default function PublicationItem({ pub }: { pub: Publication }) {
   const [open, setOpen] = useState(false);
-  const awardIsHonourable = pub.award?.toLowerCase().includes("honourable");
 
   return (
     <article
@@ -29,7 +29,7 @@ export default function PublicationItem({ pub }: { pub: Publication }) {
             {pub.url ? (
               <a
                 href={pub.url}
-                className="hover:text-teal"
+                className="text-navy hover:underline"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -45,23 +45,21 @@ export default function PublicationItem({ pub }: { pub: Publication }) {
           />
           <p className="mt-1 text-sm text-foreground/80">
             {pub.venueAbbrev && (
-              <span className="font-medium text-navy">{pub.venueAbbrev}: </span>
+              <span className="font-medium text-navy">
+                <InlineMarkdown text={pub.venueAbbrev} />:{" "}
+              </span>
             )}
-            {pub.venue}
+            {pub.venue && <InlineMarkdown text={pub.venue} />}
           </p>
 
           {pub.award && (
-            <p className="mt-2 flex items-center gap-2 text-sm text-coral">
+            <p className="mt-2 flex items-center gap-2 text-sm text-teal">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              {awardIsHonourable ? (
-                <img
-                  src="/images/ribbon_xs.png"
-                  alt=""
-                  className="h-4 w-auto"
-                />
-              ) : (
-                <span aria-hidden>★</span>
-              )}
+              <img
+                src="/images/ribbon_xs.png"
+                alt=""
+                className="h-4 w-auto"
+              />
               <span>{pub.award}</span>
             </p>
           )}
@@ -111,9 +109,18 @@ export default function PublicationItem({ pub }: { pub: Publication }) {
               <button
                 type="button"
                 onClick={() => setOpen((v) => !v)}
-                className="text-teal hover:underline"
+                className="inline-flex items-center gap-1.5 text-teal hover:underline"
+                aria-expanded={open}
               >
-                {open ? "hide abstract" : "abstract"}
+                abstract
+                <span
+                  aria-hidden
+                  className={`inline-block text-[0.7em] transition-transform ${
+                    open ? "rotate-90" : ""
+                  }`}
+                >
+                  ›
+                </span>
               </button>
             )}
           </div>
@@ -126,7 +133,7 @@ export default function PublicationItem({ pub }: { pub: Publication }) {
         </div>
 
         {pub.teaserVideoEmbed && (
-          <div className="overflow-hidden rounded-xl bg-navy/5">
+          <div className="self-start overflow-hidden rounded-xl">
             <div className="aspect-video">
               <iframe
                 src={pub.teaserVideoEmbed}

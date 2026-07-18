@@ -50,6 +50,9 @@ function parsePublication(row: RawPub): Publication | null {
   const shortTitle = cleanValue(row.short_title);
   const date = cleanValue(row.date) ?? "1970-01-01";
   const year = Number(date.slice(0, 4));
+  const teaserEmbed = cleanValue(row.teaser_video_embed);
+  const fullTalkEmbed = cleanValue(row.full_talk_embed);
+  const fullTalk = cleanValue(row.full_talk);
 
   return {
     type: cleanValue(row.type) ?? "other",
@@ -68,10 +71,10 @@ function parsePublication(row: RawPub): Publication | null {
     materials: cleanValue(row.materials),
     ebook: cleanValue(row.ebook),
     blog: cleanValue(row.blog),
-    fullTalk: cleanValue(row.full_talk),
-    fullTalkEmbed: cleanValue(row.full_talk_embed),
-    teaserVideoEmbed:
-      cleanValue(row.teaser_video_embed) ?? cleanValue(row.full_talk_embed),
+    // Only expose the full-talk link when a separate teaser is shown on the page
+    fullTalk: teaserEmbed ? fullTalk : null,
+    fullTalkEmbed,
+    teaserVideoEmbed: teaserEmbed ?? fullTalkEmbed,
     bibtex: cleanValue(row.bibtex),
     image: cleanValue(row.image),
     project: cleanValue(row.project),

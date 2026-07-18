@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
-import { CvEntryList, CvHeading } from "@/components/CvSection";
+import { CvDomain, CvEntryList, CvHeading } from "@/components/CvSection";
+import CvToc, { type TocItem } from "@/components/CvToc";
 import DisseminationTabs from "@/components/DisseminationTabs";
 import { getCvByType } from "@/lib/cv";
 
@@ -9,21 +10,45 @@ export const metadata: Metadata = {
   description: "Curriculum vitae of Ulrik Lyngs.",
 };
 
-const toc = [
+const toc: TocItem[] = [
   { id: "summary", label: "Summary" },
-  { id: "positions", label: "Positions" },
-  { id: "education", label: "Education" },
-  { id: "awards", label: "Awards" },
-  { id: "grants", label: "Grants" },
-  { id: "dissemination", label: "Dissemination" },
-  { id: "teaching", label: "Teaching" },
-  { id: "service", label: "Service" },
-  { id: "employments", label: "Employments" },
-  { id: "development", label: "Development" },
-  { id: "skills", label: "Skills" },
-  { id: "r-packages", label: "R packages" },
-  { id: "apps", label: "Apps" },
-  { id: "personal", label: "Personal" },
+  {
+    id: "academia",
+    label: "Academia",
+    children: [
+      { id: "positions", label: "Positions" },
+      { id: "education", label: "Education" },
+      { id: "awards", label: "Awards" },
+      { id: "grants", label: "Grants" },
+      { id: "dissemination", label: "Dissemination" },
+      { id: "teaching", label: "Teaching" },
+      { id: "service", label: "Service" },
+    ],
+  },
+  {
+    id: "work",
+    label: "Work",
+    children: [
+      { id: "employments", label: "Employments" },
+      { id: "development", label: "Development" },
+    ],
+  },
+  {
+    id: "technical",
+    label: "Technical",
+    children: [
+      { id: "skills", label: "Skills" },
+      { id: "r-packages", label: "R packages" },
+      { id: "apps", label: "Apps" },
+    ],
+  },
+  {
+    id: "personal",
+    label: "Personal",
+    children: [
+      { id: "volunteering", label: "Skills & volunteering" },
+    ],
+  },
 ];
 
 export default function CvPage() {
@@ -46,7 +71,6 @@ export default function CvPage() {
   return (
     <div className="mx-auto max-w-5xl px-5 pt-8 pb-12 md:px-8 md:pt-10 md:pb-16">
       <PageHeader
-        eyebrow="About"
         title="Curriculum vitae"
         description="Academic positions, education, awards, teaching, and more."
       />
@@ -56,22 +80,12 @@ export default function CvPage() {
           <p className="mb-3 text-[12px] font-semibold tracking-[0.08em] text-muted uppercase">
             On this page
           </p>
-          <nav className="flex flex-wrap gap-2 lg:flex-col lg:gap-1">
-            {toc.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className="rounded-lg px-2 py-1 text-sm text-muted transition hover:bg-hoverWash hover:text-navy"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
+          <CvToc items={toc} />
         </aside>
 
         <div>
-          <CvHeading id="summary">Summary</CvHeading>
-          <div className="space-y-4 text-sm leading-relaxed text-foreground/90 md:text-base">
+          <CvDomain id="summary">Summary</CvDomain>
+          <div className="mt-4 space-y-4 text-sm leading-relaxed text-foreground/90 md:text-base">
             <p>
               I am passionate about using insights from the behavioural
               neurosciences to{" "}
@@ -107,6 +121,8 @@ export default function CvPage() {
             Download academic CV (PDF)
           </a>
 
+          <CvDomain id="academia">Academia</CvDomain>
+
           <CvHeading id="positions">Research positions</CvHeading>
           <CvEntryList entries={positions} />
 
@@ -132,13 +148,17 @@ export default function CvPage() {
           <CvHeading id="service">Service</CvHeading>
           <CvEntryList entries={service} />
 
+          <CvDomain id="work">Work</CvDomain>
+
           <CvHeading id="employments">Selected employments</CvHeading>
           <CvEntryList entries={work} />
 
           <CvHeading id="development">Professional development</CvHeading>
           <CvEntryList entries={profDev} yearKey="yearBegin" />
 
-          <CvHeading id="skills">Technical skills</CvHeading>
+          <CvDomain id="technical">Technical</CvDomain>
+
+          <CvHeading id="skills">Skills</CvHeading>
           <CvEntryList entries={technical} yearKey="yearBegin" />
 
           <CvHeading id="r-packages">R packages</CvHeading>
@@ -147,7 +167,9 @@ export default function CvPage() {
           <CvHeading id="apps">Apps</CvHeading>
           <CvEntryList entries={apps} />
 
-          <CvHeading id="personal">Skills & volunteering</CvHeading>
+          <CvDomain id="personal">Personal</CvDomain>
+
+          <CvHeading id="volunteering">Skills & volunteering</CvHeading>
           <CvEntryList entries={volunteering} />
         </div>
       </div>

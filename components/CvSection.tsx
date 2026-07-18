@@ -64,13 +64,20 @@ function EntryBody({ entry }: { entry: CvEntry }) {
   const title = entry.what ?? "";
 
   if (entry.type.includes("talk") || entry.type === "poster") {
+    const venueLine = [
+      entry.institution,
+      entry.where,
+      entry.department,
+      entry.additionalInfo,
+    ]
+      .filter(Boolean)
+      .join(", ");
+
     return (
       <div>
-        {(entry.institution || entry.where) && (
+        {venueLine && (
           <p className="font-medium text-navy">
-            {[entry.institution, entry.where].filter(Boolean).join(", ")}
-            {entry.department ? `, ${entry.department}` : ""}
-            {entry.additionalInfo ? `, ${entry.additionalInfo}` : ""}
+            <Md text={venueLine} />
           </p>
         )}
         <p className="mt-0.5 text-foreground">
@@ -98,7 +105,11 @@ function EntryBody({ entry }: { entry: CvEntry }) {
   if (entry.type === "media") {
     return (
       <p>
-        <span className="font-medium text-navy">{entry.where}</span>
+        {entry.where && (
+          <span className="font-medium text-navy">
+            <Md text={entry.where} />
+          </span>
+        )}
         {entry.what ? (
           <>
             , <Md text={entry.what} />
@@ -211,7 +222,7 @@ function EntryBody({ entry }: { entry: CvEntry }) {
   );
 }
 
-export function CvHeading({
+export function CvDomain({
   id,
   children,
 }: {
@@ -221,9 +232,26 @@ export function CvHeading({
   return (
     <h2
       id={id}
-      className="mt-12 mb-4 scroll-mt-24 font-serif text-2xl font-semibold text-navy first:mt-0"
+      className="mt-14 mb-2 scroll-mt-24 font-serif text-3xl font-semibold text-navy first:mt-0"
     >
       {children}
     </h2>
+  );
+}
+
+export function CvHeading({
+  id,
+  children,
+}: {
+  id: string;
+  children: ReactNode;
+}) {
+  return (
+    <h3
+      id={id}
+      className="mt-10 mb-4 scroll-mt-24 font-serif text-xl font-semibold text-navy"
+    >
+      {children}
+    </h3>
   );
 }

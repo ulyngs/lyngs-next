@@ -1,4 +1,6 @@
 import Link from "next/link";
+import FocusToolsGrid from "@/components/FocusToolsGrid";
+import ResearchToolsGrid from "@/components/ResearchToolsGrid";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 
 const jumpCards = [
@@ -32,20 +34,16 @@ const venues = [
 
 const featuredTalks = [
   {
-    embed: "https://www.youtube.com/embed/QClOST9hIG4",
+    embed: "https://www.youtube.com/embed/QClOST9hIG4?start=502",
     title: "Attention, Freedom, Digital Addiction and Dating Apps",
     venue: "Barnes Philosophy Club, London · 2023",
-  },
-  {
-    embed: "https://www.youtube.com/embed/G-EpPpIGsws",
-    title: "3 Minute Thesis Competition",
-    venue: "University of Oxford · 2021",
   },
 ];
 
 const papers = [
   {
     tag: "CHI'24",
+    award: true,
     title:
       "“I finally felt I had the tools to control these urges”: Empowering Students to Achieve Their Device Use Goals With the Reduce Digital Distraction Workshop",
     authors:
@@ -53,17 +51,7 @@ const papers = [
     blurb:
       "Insights from Oxford students who used the workshop to reflect on device-use goals and apply digital focus tools.",
     href: "/publications/#i_finally_felt_i_had_the_tools_to_control_these_urges_empowering_students_to_achieve_their_device_use_goals_with_the_reduce_digital_distraction_workshop",
-  },
-  {
-    tag: "CHI'23",
-    award: true,
-    title:
-      "SwitchTube: A Proof-of-Concept System Introducing ‘Adaptable Commitment Interfaces’ as a Tool for Digital Wellbeing",
-    authors:
-      "Kai Lukoff, Ulrik Lyngs, Himanshu Zade, Vera Liao, James Choi, Kaiyue Fan, Sean Munson, Alexis Hiniker",
-    blurb:
-      "Showed the value of letting people switch between a search-first and a recommendations-first YouTube interface.",
-    href: "/publications/#switch_tube_a_proof_of_concept_system_introducing_adaptable_commitment_interfaces_as_a_tool_for_digital_wellbeing",
+    embed: "https://youtube.com/embed/ffm6wXsDDa8",
   },
   {
     tag: "CHI'20",
@@ -74,6 +62,7 @@ const papers = [
     blurb:
       "Tested removing Facebook’s newsfeed versus adding goal reminders: both helped, with large and distinct effects.",
     href: "/publications/#evaluating_design_interventions_for_self_control_on_facebook",
+    embed: "https://www.youtube.com/embed/zj9I-2gjths",
   },
   {
     tag: "CHI'19",
@@ -85,58 +74,33 @@ const papers = [
     blurb:
       "Reviewed design features in 367 apps and browser extensions, organised with a dual-systems model of self-control.",
     href: "/publications/#applying_dual_systems_theory_to_digital_self_control_tools",
+    embed: "https://www.youtube.com/embed/kf-TwEo954s",
   },
 ];
 
-const focusTools = [
+const personalProjects = [
   {
-    title: "ReDD Focus",
+    name: "Karaoke Collective Songbook",
     description:
-      "Our browser extension and app to eliminate addictive features with one click (feeds, Shorts, Reels, …).",
-    href: "https://digitalhabits.org/tools/reddfocus",
-    logoSrc: "/images/tool-logos/logo-reddfocus.svg",
+      "The songbook framework I built for my live karaoke band — drunk-person-proof design for gigging musicians...",
+    href: "https://songbook.karaokecollective.com",
+    imageSrc: "/images/personal/songbook.png",
   },
   {
-    title: "ReDD Blocker",
+    name: "Lyngs quiz",
     description:
-      "Our intuitive tool for blocking distracting apps and websites on your computer or phone when you need to focus.",
-    href: "https://digitalhabits.org/tools/reddblocker",
-    logoSrc: "/images/tool-logos/logo-reddblocker-shield.svg",
+      "A quiz app that includes all the question formats I personally find most fun. I use it often for tailor-made quizzes with friends.",
+    href: "https://quiz.ulriklyngs.com",
+    githubHref: "https://github.com/ulyngs/lyngs-quiz",
+    imageSrc: "/images/personal/quiz.png",
   },
   {
-    title: "ReDD To-Do",
+    name: "Solitaire",
     description:
-      "Our simple to-do app that keeps your current task visible while you work. Especially helpful for those of us with ADHD.",
-    href: "https://digitalhabits.org/tools/redd-todo",
-    logoSrc: "/images/tool-logos/logo-enkelt.svg",
-  },
-  {
-    title: "Phone-Free 2FA",
-    description:
-      "Our simple and secure browser extension that lets you use your computer for 2FA. Keep your phone out of sight, out of mind.",
-    href: "https://digitalhabits.org/tools/phone-free-2fa",
-    logoSrc: "/images/tool-logos/logo-phonefree2fa.svg",
-  },
-];
-
-const otherBuilds = [
-  {
-    label: "Transparent & Reproducible Research",
-    items: [
-      { name: "oxforddown", href: "https://github.com/ulyngs/oxforddown" },
-      { name: "pagedownCV", href: "https://github.com/ulyngs/pagedownCV" },
-      {
-        name: "R Markdown ACM CHI templates",
-        href: "/post/2018/10/29/r-packages-for-chi-papers-with-r-markdown/",
-      },
-    ],
-  },
-  {
-    label: "Personal",
-    items: [
-      { name: "Karaoke Collective", href: "https://karaokecollective.com" },
-      { name: "HowTheLightGetsIn", href: "https://howthelightgetsin.org" },
-    ],
+      "An oldschool solitaire game that runs in the browser. I built it over xmas 2025 for my father after he changed computer and was missing his old game!",
+    href: "https://solitaire.ulriklyngs.com",
+    githubHref: "https://github.com/ulyngs/solitaire",
+    imageSrc: "/images/personal/solitaire.png",
   },
 ];
 
@@ -157,28 +121,48 @@ export default function HomePage() {
               <h1 className="font-serif text-[1.75rem] font-medium leading-[1.2] tracking-tight md:text-[2.35rem]">
                 Research, tools, and talks for digital wellbeing
               </h1>
-              <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/70 md:text-base">
-                <span>
-                  Co-founder of the{" "}
+              <div className="mt-5 max-w-2xl space-y-3 text-[15px] leading-relaxed text-white/70 md:text-base">
+                <p>
+                  I am co-founder of the{" "}
                   <a
                     href="https://digitalhabits.org"
                     className="text-white underline decoration-white/30 underline-offset-2 hover:decoration-white"
                   >
                     Centre for Digital Habits
-                  </a>{" "}
-                  · Research Fellow at{" "}
+                  </a>
+                  , which helps people redesign their digital life to serve
+                  their goals &amp; needs.
+                </p>
+                <p>
+                  I am also Research Fellow at{" "}
                   <a
                     href="https://www.linacre.ox.ac.uk"
                     className="text-white underline decoration-white/30 underline-offset-2 hover:decoration-white"
                   >
-                    Linacre College, Oxford
+                    Linacre College
                   </a>
-                </span>
-                <span className="block">
-                  Research representative, Denmark&apos;s Media Council for
-                  Children and Youth
-                </span>
-              </p>
+                  , and research representative on Denmark&apos;s Media Council
+                  for Children and Youth.
+                </p>
+                <p>
+                  When I don&apos;t think about digital distraction, I play
+                  various instruments in{" "}
+                  <a
+                    href="https://karaokecollective.com"
+                    className="text-white underline decoration-white/30 underline-offset-2 hover:decoration-white"
+                  >
+                    The Karaoke Collective
+                  </a>
+                  . Previously, I was a festival producer at{" "}
+                  <a
+                    href="https://howthelightgetsin.org"
+                    className="text-white underline decoration-white/30 underline-offset-2 hover:decoration-white"
+                  >
+                    HowTheLightGetsIn
+                  </a>
+                  .
+                </p>
+              </div>
             </div>
           </div>
 
@@ -222,7 +206,7 @@ export default function HomePage() {
                 <h2 className="font-serif text-2xl font-medium tracking-tight text-navy md:text-[1.75rem]">
                   Talks & workshops on digital wellbeing and AI
                 </h2>
-                <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-muted">
+                <p className="mt-2 max-w-xl text-base leading-relaxed text-foreground">
                   I help individuals and organisations redesign their
                   relationship with digital devices, and build with AI, through
                   talks and keynotes, workshops, and practical tool demos
@@ -238,39 +222,36 @@ export default function HomePage() {
                     </span>
                   ))}
                 </div>
+
+                <div className="mt-8">
+                  <p className="text-base font-semibold tracking-[0.06em] text-teal uppercase">
+                    Example talk
+                  </p>
+                  <div className="mt-4 grid gap-4">
+                    {featuredTalks.map((talk) => (
+                      <div
+                        key={talk.embed}
+                        className="overflow-hidden rounded-xl border border-border bg-white"
+                      >
+                        <YouTubeEmbed embed={talk.embed} title={talk.title} />
+                        <div className="px-4 py-3.5">
+                          <p className="font-serif text-[15px] font-medium leading-snug text-navy">
+                            {talk.title}
+                          </p>
+                          <p className="mt-1 text-xs leading-relaxed text-muted">
+                            {talk.venue}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
               <div className="md:text-right">
                 <p className="font-serif text-3xl font-medium text-teal md:text-4xl">
                   400+
                 </p>
                 <p className="mt-0.5 text-sm text-muted">workshops and talks</p>
-              </div>
-            </div>
-
-            <div className="mt-10 grid gap-6 md:mt-12 md:grid-cols-[7.5rem_1fr] md:gap-10">
-              <div aria-hidden className="hidden md:block" />
-              <div>
-                <p className="text-[11px] font-semibold tracking-[0.08em] text-teal uppercase">
-                  Example talks
-                </p>
-                <div className="mt-4 grid max-w-2xl gap-4 sm:grid-cols-2">
-                  {featuredTalks.map((talk) => (
-                    <div
-                      key={talk.embed}
-                      className="overflow-hidden rounded-xl border border-border bg-white"
-                    >
-                      <YouTubeEmbed embed={talk.embed} title={talk.title} />
-                      <div className="px-4 py-3.5">
-                        <p className="font-serif text-[15px] font-medium leading-snug text-navy">
-                          {talk.title}
-                        </p>
-                        <p className="mt-1 text-xs leading-relaxed text-muted">
-                          {talk.venue}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
           </section>
@@ -288,56 +269,69 @@ export default function HomePage() {
                 <h2 className="font-serif text-2xl font-medium tracking-tight text-navy md:text-[1.75rem]">
                   Designing to support digital self-control
                 </h2>
-                <p className="mt-4 max-w-2xl text-[15px] leading-relaxed text-muted">
+                <p className="mt-2 max-w-2xl text-base leading-relaxed text-foreground">
                   Hundreds of apps and browser extensions promise to help us
                   control our time and attention on digital devices. I&apos;ve
                   studied this landscape since 2015 to figure out what good
                   design looks like, and to test what actually works.
                 </p>
-                <ul className="mt-8 space-y-5">
+                <p className="mt-8 text-base font-semibold tracking-[0.06em] text-teal uppercase">
+                  Selected papers
+                </p>
+                <ul className="mt-4 space-y-5">
                   {papers.map((paper) => (
-                    <li key={paper.title}>
-                      <Link
-                        href={paper.href}
-                        className="group grid gap-2 sm:grid-cols-[7.5rem_1fr] sm:gap-4"
-                      >
+                    <li
+                      key={paper.title}
+                      className="grid gap-4 lg:grid-cols-[1fr_minmax(0,15rem)] lg:gap-5"
+                    >
+                      <div className="grid gap-2 sm:grid-cols-[4.5rem_1fr] sm:gap-3">
                         <span className="pt-0.5 text-xs font-semibold tracking-wide text-teal uppercase">
                           {paper.tag}
                         </span>
-                        <span>
-                          <span className="font-medium text-navy group-hover:text-teal">
-                            {paper.title}
-                          </span>
-                          <span className="mt-1 block text-xs leading-relaxed text-muted">
-                            {paper.authors
-                              .split("Ulrik Lyngs")
-                              .map((part, i, parts) => (
-                                <span key={i}>
-                                  {part}
-                                  {i < parts.length - 1 && (
-                                    <span className="font-semibold text-navy">
-                                      Ulrik Lyngs
-                                    </span>
-                                  )}
-                                </span>
-                              ))}
-                          </span>
-                          {paper.award && (
-                            <span className="mt-1 flex items-center gap-1.5 text-xs text-coral">
-                              {/* eslint-disable-next-line @next/next/no-img-element */}
-                              <img
-                                src="/images/ribbon_xs.png"
-                                alt=""
-                                className="h-3.5 w-auto"
-                              />
-                              Best paper honourable mention (top 5%)
+                        <div>
+                          <Link href={paper.href} className="group block">
+                            <span className="font-medium text-navy group-hover:text-teal">
+                              {paper.title}
                             </span>
-                          )}
-                          <span className="mt-0.5 block text-sm text-muted">
-                            {paper.blurb}
-                          </span>
-                        </span>
-                      </Link>
+                            <span className="mt-1 block text-xs leading-relaxed text-muted">
+                              {paper.authors
+                                .split("Ulrik Lyngs")
+                                .map((part, i, parts) => (
+                                  <span key={i}>
+                                    {part}
+                                    {i < parts.length - 1 && (
+                                      <span className="font-semibold text-navy">
+                                        Ulrik Lyngs
+                                      </span>
+                                    )}
+                                  </span>
+                                ))}
+                            </span>
+                            {paper.award && (
+                              <span className="mt-1 flex items-center gap-1.5 text-xs text-teal">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                  src="/images/ribbon_xs.png"
+                                  alt=""
+                                  className="h-3.5 w-auto"
+                                />
+                                Best paper honourable mention (top 5%)
+                              </span>
+                            )}
+                            <span className="mt-0.5 block text-sm text-muted">
+                              {paper.blurb}
+                            </span>
+                          </Link>
+                        </div>
+                      </div>
+                      {paper.embed && (
+                        <div className="self-start overflow-hidden rounded-xl border border-border">
+                          <YouTubeEmbed
+                            embed={paper.embed}
+                            title={paper.title}
+                          />
+                        </div>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -361,10 +355,10 @@ export default function HomePage() {
                 <h2 className="font-serif text-2xl font-medium tracking-tight text-navy md:text-[1.75rem]">
                   Things I&apos;ve built
                 </h2>
-                <p className="mt-5 text-[11px] font-semibold tracking-[0.08em] text-teal uppercase">
+                <p className="mt-5 text-base font-semibold tracking-[0.06em] text-teal uppercase">
                   Digital focus tools
                 </p>
-                <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-muted">
+                <p className="mt-2 max-w-2xl text-base leading-relaxed text-foreground">
                   With the{" "}
                   <a
                     href="https://digitalhabits.org"
@@ -374,71 +368,72 @@ export default function HomePage() {
                   >
                     Centre for Digital Habits
                   </a>{" "}
-                  I&apos;m creating practical tools for making it easier to
-                  control your time and attention when using digital devices.
+                  I build practical tools for making it easier to control
+                  your time and attention when using digital devices.
                   Give them a try!
                 </p>
 
-                <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                  {focusTools.map((tool) => (
-                    <a
-                      key={tool.title}
-                      href={tool.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="group flex flex-col rounded-xl border border-border bg-white px-5 py-5 transition hover:border-teal/40 hover:shadow-sm"
-                    >
-                      <div className="mb-3 flex items-center gap-3">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                          src={tool.logoSrc}
-                          alt=""
-                          className="h-10 w-10 object-contain"
-                        />
-                        <h3 className="font-serif text-xl font-medium text-navy group-hover:text-teal">
-                          {tool.title}
+                <FocusToolsGrid />
+
+                <div className="mt-12">
+                  <p className="text-base font-semibold tracking-[0.06em] text-teal uppercase">
+                    Personal
+                  </p>
+                  <div className="mt-4 grid gap-4 sm:grid-cols-3">
+                    {personalProjects.map((project) => (
+                      <div
+                        key={project.name}
+                        className="flex flex-col overflow-hidden rounded-xl border border-border bg-white px-5 pt-5 pb-4 transition hover:border-teal/40 hover:shadow-sm"
+                      >
+                        <h3 className="font-serif text-xl font-medium text-navy">
+                          {project.name}
                         </h3>
-                        <span className="ml-auto text-teal opacity-0 transition group-hover:opacity-100">
-                          →
-                        </span>
+                        <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+                          <a
+                            href={project.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="text-teal hover:underline"
+                          >
+                            Open
+                          </a>
+                          {project.githubHref && (
+                            <a
+                              href={project.githubHref}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="text-teal hover:underline"
+                            >
+                              GitHub
+                            </a>
+                          )}
+                        </div>
+                        <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
+                          {project.description}
+                        </p>
+                        <a
+                          href={project.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="mt-4 block overflow-hidden rounded-lg border border-border"
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={project.imageSrc}
+                            alt=""
+                            className="aspect-[16/10] w-full object-cover object-top"
+                          />
+                        </a>
                       </div>
-                      <p className="text-sm leading-relaxed text-muted">
-                        {tool.description}
-                      </p>
-                    </a>
-                  ))}
+                    ))}
+                  </div>
                 </div>
 
-                <div className="mt-12 grid gap-10 sm:grid-cols-2">
-                  {otherBuilds.map((col) => (
-                    <div key={col.label}>
-                      <p className="text-[11px] font-semibold tracking-[0.08em] text-teal uppercase">
-                        {col.label}
-                      </p>
-                      <ul className="mt-4 space-y-2.5">
-                        {col.items.map((item) => (
-                          <li key={item.name}>
-                            <a
-                              href={item.href}
-                              target={
-                                item.href.startsWith("http")
-                                  ? "_blank"
-                                  : undefined
-                              }
-                              rel={
-                                item.href.startsWith("http")
-                                  ? "noreferrer"
-                                  : undefined
-                              }
-                              className="text-[15px] text-navy hover:text-teal"
-                            >
-                              {item.name}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
+                <div className="mt-12">
+                  <p className="text-base font-semibold tracking-[0.06em] text-teal uppercase">
+                    Transparent & reproducible research
+                  </p>
+                  <ResearchToolsGrid />
                 </div>
               </div>
             </div>

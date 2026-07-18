@@ -14,7 +14,6 @@ export default function PublicationsPage() {
   return (
     <div className="mx-auto max-w-5xl px-5 pt-8 pb-12 md:px-8 md:pt-10 md:pb-16">
       <PageHeader
-        eyebrow="Research"
         title="Publications"
         description="Papers, extended abstracts, chapters, and other writing."
       />

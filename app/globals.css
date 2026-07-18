@@ -61,3 +61,27 @@ body {
 .prose-lyngs img {
   border-radius: 0.75rem;
 }
+
+/* Always-visible scrollbar for the CV dissemination list */
+.dissemination-scroll {
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: #c5c0b8 transparent;
+}
+
+.dissemination-scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dissemination-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dissemination-scroll::-webkit-scrollbar-thumb {
+  background: #c5c0b8;
+  border-radius: 999px;
+}
+
+.dissemination-scroll::-webkit-scrollbar-thumb:hover {
+  background: #a8a39a;
+}

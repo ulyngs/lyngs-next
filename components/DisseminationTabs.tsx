@@ -26,7 +26,7 @@ export default function DisseminationTabs({
 
   return (
     <div>
-      <div className="mb-4 flex flex-wrap gap-2 border-b border-border pb-3">
+      <div className="mb-4 flex flex-wrap gap-2">
         {tabs.map((t) => (
           <button
             key={t.id}
@@ -42,7 +42,9 @@ export default function DisseminationTabs({
           </button>
         ))}
       </div>
-      <CvEntryList entries={current} yearKey="yearBegin" />
+      <div className="dissemination-scroll max-h-[32rem] overflow-y-scroll">
+        <CvEntryList entries={current} yearKey="yearBegin" />
+      </div>
     </div>
   );
 }
