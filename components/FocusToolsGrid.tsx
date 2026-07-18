@@ -57,6 +57,7 @@ const tools: FocusTool[] = [
 
 function DemoVideo({ src, title }: { src: string; title: string }) {
   const [playing, setPlaying] = useState(false);
+  const posterSrc = src.replace(/\.mp4$/, "-poster.jpg");
 
   return (
     <div className="overflow-hidden rounded-lg border border-border bg-warmGrey">
@@ -65,6 +66,7 @@ function DemoVideo({ src, title }: { src: string; title: string }) {
           <video
             className="h-full w-full object-contain"
             src={src}
+            poster={posterSrc}
             controls
             autoPlay
             playsInline
@@ -76,12 +78,11 @@ function DemoVideo({ src, title }: { src: string; title: string }) {
             className="group relative block h-full w-full overflow-hidden p-0 leading-none"
             aria-label={`Play demo: ${title}`}
           >
-            <video
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               className="pointer-events-none h-full w-full object-contain"
-              src={src}
-              muted
-              playsInline
-              preload="metadata"
+              src={posterSrc}
+              alt=""
             />
             <span className="absolute inset-0 bg-navy/10 transition group-hover:bg-navy/20" />
             <span className="absolute inset-0 flex items-center justify-center">
