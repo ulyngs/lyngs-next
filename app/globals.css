@@ -1,26 +1,63 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --cream: #f7f6f3;
+  --navy: #1e2d3e;
+  --navy-mid: #2a3b4f;
+  --navy-card: #243447;
+  --teal: #2a9d8f;
+  --teal-soft: #e5f5f3;
+  --coral: #c45c5c;
+  --muted: #5c6570;
+  --border: #e4e1db;
+  --foreground: #2c2c35;
 }
 
 @theme inline {
-  --color-background: var(--background);
+  --color-background: var(--cream);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-cream: var(--cream);
+  --color-navy: var(--navy);
+  --color-navyMid: var(--navy-mid);
+  --color-navyCard: var(--navy-card);
+  --color-teal: var(--teal);
+  --color-tealSoft: var(--teal-soft);
+  --color-coral: var(--coral);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-warmGrey: #eceae6;
+  --color-hoverWash: #efece7;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  background: var(--cream);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: var(--teal-soft);
+  color: var(--navy);
+}
+
+.prose-lyngs {
+  --tw-prose-body: #2c2c35;
+  --tw-prose-headings: #1e2d3e;
+  --tw-prose-links: #2a9d8f;
+  --tw-prose-bold: #1e2d3e;
+  --tw-prose-quotes: #5c6570;
+  --tw-prose-code: #1e2d3e;
+  --tw-prose-pre-bg: #1e2d3e;
+}
+
+.prose-lyngs pre,
+.prose-lyngs img {
+  border-radius: 0.75rem;
 }
