@@ -5,21 +5,63 @@ import YouTubeEmbed from "@/components/YouTubeEmbed";
 
 const jumpCards = [
   {
-    title: "Hear me speak",
-    body: "Talks and workshops on digital wellbeing and AI for universities, schools, and organisations.",
+    title: "Public speaking",
+    body: "I give talks and workshops about digital wellbeing and AI at universities, schools, and organisations.",
     href: "#speaking",
   },
   {
-    title: "Read the research",
-    body: "My research on why we get distracted on our devices, and what actually helps.",
+    title: "Research",
+    body: "I have done a decade of research on why we get distracted on digital devices, and what to do about it.",
     href: "/publications/",
   },
   {
-    title: "Use the tools",
-    body: "ReDD Focus, Blocker, To-Do, Phone-Free 2FA, and more open-source tools you can use today.",
+    title: "Digital tools",
+    body: "I build apps and browser extensions that help people focus, do open and transparent research, and to have fun!",
     href: "#toolbox",
   },
 ];
+
+const contactLinks = [
+  {
+    label: "Google Scholar",
+    href: "https://scholar.google.co.uk/citations?user=e8XDAzcAAAAJ&hl=en",
+    icon: "scholar" as const,
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/ulrik-lyngs",
+    icon: "linkedin" as const,
+  },
+  {
+    label: "ulrik@digitalhabits.org",
+    href: "mailto:ulrik@digitalhabits.org",
+    icon: "email" as const,
+  },
+];
+
+function ContactIcon({ icon }: { icon: "email" | "scholar" | "linkedin" }) {
+  if (icon === "email") {
+    return (
+      <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" aria-hidden fill="none" stroke="currentColor" strokeWidth="1.75">
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+        <path d="m4 7 8 6 8-6" />
+      </svg>
+    );
+  }
+  if (icon === "scholar") {
+    return (
+      <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" aria-hidden fill="currentColor">
+        <path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3z" />
+        <path d="M5 13.18V17c0 1.66 3.13 3 7 3s7-1.34 7-3v-3.82l-7 3.82-7-3.82z" />
+      </svg>
+    );
+  }
+  return (
+    <svg viewBox="0 0 24 24" className="h-4 w-4 shrink-0" aria-hidden fill="currentColor">
+      <path d="M4.98 3.5C4.98 4.88 3.88 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V23h-4V8.5zM8.5 8.5h3.8v2h.05c.53-1 1.82-2.05 3.75-2.05 4 0 4.75 2.63 4.75 6.05V23h-4v-6.55c0-1.56-.03-3.57-2.17-3.57-2.18 0-2.51 1.7-2.51 3.46V23h-3.8V8.5z" />
+    </svg>
+  );
+}
 
 const venues = [
   "BBC",
@@ -27,6 +69,8 @@ const venues = [
   "DR",
   "University of Cambridge",
   "University of Oxford",
+  "Oxford Ideas Festival",
+  "Indian Institute of Technology",
   "CPDP Brussels",
   "Folkeuniversitetet",
   "Abu Dhabi Mental Health Conference",
@@ -82,7 +126,7 @@ const personalProjects = [
   {
     name: "Karaoke Collective Songbook",
     description:
-      "The songbook framework I built for my live karaoke band — drunk-person-proof design for gigging musicians...",
+      "The songbook framework I built for my live karaoke band — drunk-person-proof design for the gigging musician...",
     href: "https://songbook.karaokecollective.com",
     imageSrc: "/images/personal/songbook.png",
   },
@@ -130,7 +174,7 @@ export default function HomePage() {
                   >
                     Centre for Digital Habits
                   </a>
-                  , which helps people redesign their digital life to serve
+                  , where we help people redesign their digital life to serve
                   their goals &amp; needs.
                 </p>
                 <p>
@@ -145,23 +189,38 @@ export default function HomePage() {
                   for Children and Youth.
                 </p>
                 <p>
-                  When I don&apos;t think about digital distraction, I play
-                  various instruments in{" "}
-                  <a
-                    href="https://karaokecollective.com"
-                    className="text-white underline decoration-white/30 underline-offset-2 hover:decoration-white"
-                  >
-                    The Karaoke Collective
-                  </a>
-                  . Previously, I was a festival producer at{" "}
+                  Previously, I was a festival producer at{" "}
                   <a
                     href="https://howthelightgetsin.org"
                     className="text-white underline decoration-white/30 underline-offset-2 hover:decoration-white"
                   >
                     HowTheLightGetsIn
                   </a>
+                  . When I don&apos;t think about digital distraction, I play
+                  various instruments in my{" "}
+                  <a
+                    href="https://karaokecollective.com"
+                    className="text-white underline decoration-white/30 underline-offset-2 hover:decoration-white"
+                  >
+                    live karaoke band
+                  </a>
                   .
                 </p>
+              </div>
+              <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/15 pt-5 text-sm text-white/70">
+                {contactLinks.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    {...(link.href.startsWith("mailto:")
+                      ? {}
+                      : { target: "_blank", rel: "noreferrer" })}
+                    className="inline-flex items-center gap-2 transition hover:text-white"
+                  >
+                    <ContactIcon icon={link.icon} />
+                    <span>{link.label}</span>
+                  </a>
+                ))}
               </div>
             </div>
           </div>
@@ -198,7 +257,7 @@ export default function HomePage() {
             id="speaking"
             className="scroll-mt-8 border-b border-border py-14 md:py-16"
           >
-            <div className="grid gap-6 md:grid-cols-[7.5rem_1fr_auto] md:gap-10">
+            <div className="grid gap-6 md:grid-cols-[7.5rem_1fr] md:gap-10">
               <p className="text-[13px] font-medium tracking-wide text-muted">
                 01 — Speaking
               </p>
@@ -207,24 +266,14 @@ export default function HomePage() {
                   Talks & workshops on digital wellbeing and AI
                 </h2>
                 <p className="mt-2 max-w-xl text-base leading-relaxed text-foreground">
-                  I help individuals and organisations redesign their
+                  I help individuals and organisations improve their
                   relationship with digital devices, and build with AI, through
                   talks and keynotes, workshops, and practical tool demos
                   grounded in HCI research.
                 </p>
-                <div className="mt-5 flex flex-wrap gap-2">
-                  {venues.map((v) => (
-                    <span
-                      key={v}
-                      className="rounded-full bg-[#eceae6] px-3 py-1 text-xs text-muted"
-                    >
-                      {v}
-                    </span>
-                  ))}
-                </div>
 
                 <div className="mt-8">
-                  <p className="text-base font-semibold tracking-[0.06em] text-teal uppercase">
+                  <p className="text-base font-semibold tracking-[0.06em] text-foreground uppercase">
                     Example talk
                   </p>
                   <div className="mt-4 grid gap-4">
@@ -246,12 +295,23 @@ export default function HomePage() {
                     ))}
                   </div>
                 </div>
-              </div>
-              <div className="md:text-right">
-                <p className="font-serif text-3xl font-medium text-teal md:text-4xl">
-                  400+
-                </p>
-                <p className="mt-0.5 text-sm text-muted">workshops and talks</p>
+
+                <div className="mt-8 flex flex-wrap gap-2">
+                  {venues.map((v) => (
+                    <span
+                      key={v}
+                      className="rounded-full bg-[#eceae6] px-3 py-1 text-xs text-muted"
+                    >
+                      {v}
+                    </span>
+                  ))}
+                  <Link
+                    href="/cv/#dissemination"
+                    className="self-center text-xs text-teal hover:underline"
+                  >
+                    and many others
+                  </Link>
+                </div>
               </div>
             </div>
           </section>
@@ -275,7 +335,7 @@ export default function HomePage() {
                   studied this landscape since 2015 to figure out what good
                   design looks like, and to test what actually works.
                 </p>
-                <p className="mt-8 text-base font-semibold tracking-[0.06em] text-teal uppercase">
+                <p className="mt-8 text-base font-semibold tracking-[0.06em] text-foreground uppercase">
                   Selected papers
                 </p>
                 <ul className="mt-4 space-y-5">
@@ -355,7 +415,7 @@ export default function HomePage() {
                 <h2 className="font-serif text-2xl font-medium tracking-tight text-navy md:text-[1.75rem]">
                   Things I&apos;ve built
                 </h2>
-                <p className="mt-5 text-base font-semibold tracking-[0.06em] text-teal uppercase">
+                <p className="mt-5 text-base font-semibold tracking-[0.06em] text-foreground uppercase">
                   Digital focus tools
                 </p>
                 <p className="mt-2 max-w-2xl text-base leading-relaxed text-foreground">
@@ -376,7 +436,14 @@ export default function HomePage() {
                 <FocusToolsGrid />
 
                 <div className="mt-12">
-                  <p className="text-base font-semibold tracking-[0.06em] text-teal uppercase">
+                  <p className="text-base font-semibold tracking-[0.06em] text-foreground uppercase">
+                    Transparent & reproducible research
+                  </p>
+                  <ResearchToolsGrid />
+                </div>
+
+                <div className="mt-12">
+                  <p className="text-base font-semibold tracking-[0.06em] text-foreground uppercase">
                     Personal
                   </p>
                   <div className="mt-4 grid gap-4 sm:grid-cols-3">
@@ -427,13 +494,6 @@ export default function HomePage() {
                       </div>
                     ))}
                   </div>
-                </div>
-
-                <div className="mt-12">
-                  <p className="text-base font-semibold tracking-[0.06em] text-teal uppercase">
-                    Transparent & reproducible research
-                  </p>
-                  <ResearchToolsGrid />
                 </div>
               </div>
             </div>

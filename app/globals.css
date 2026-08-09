@@ -66,22 +66,25 @@ body {
 .dissemination-scroll {
   scrollbar-gutter: stable;
   scrollbar-width: thin;
-  scrollbar-color: #c5c0b8 transparent;
+  scrollbar-color: #a8a39a #eceae6;
 }
 
 .dissemination-scroll::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 .dissemination-scroll::-webkit-scrollbar-track {
-  background: transparent;
+  background: #eceae6;
+  border-radius: 999px;
+  margin-block: 6px;
 }
 
 .dissemination-scroll::-webkit-scrollbar-thumb {
-  background: #c5c0b8;
+  background: #a8a39a;
   border-radius: 999px;
+  border: 2px solid #eceae6;
 }
 
 .dissemination-scroll::-webkit-scrollbar-thumb:hover {
-  background: #a8a39a;
+  background: #8a857c;
 }

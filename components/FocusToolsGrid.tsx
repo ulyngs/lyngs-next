@@ -15,31 +15,31 @@ type FocusTool = {
 const tools: FocusTool[] = [
   {
     id: "focus",
-    title: "ReDD Focus",
+    title: "Focus",
     description:
       "Our browser extension and app to eliminate addictive features with one click (feeds, Shorts, Reels, …).",
-    href: "https://digitalhabits.org/tools/reddfocus",
-    githubHref: "https://github.com/ulyngs/reddfocus-open-source",
+    href: "https://digitalhabits.org/tools/focus",
+    githubHref: "https://github.com/ulyngs/digital-habits-focus",
     logoSrc: "/images/tool-logos/logo-reddfocus.svg",
     videoSrc: "/videos/reddfocus.mp4",
   },
   {
     id: "block",
-    title: "ReDD Blocker",
+    title: "Blocker",
     description:
       "Our intuitive tool for blocking distracting apps and websites on your computer or phone when you need to focus.",
-    href: "https://digitalhabits.org/tools/reddblocker",
-    githubHref: "https://github.com/ulyngs/redd-block",
+    href: "https://digitalhabits.org/tools/blocker",
+    githubHref: "https://github.com/ulyngs/digital-habits-blocker",
     logoSrc: "/images/tool-logos/logo-reddblocker-shield.svg",
     videoSrc: "/videos/reddblocker.mp4",
   },
   {
     id: "todo",
-    title: "ReDD To-Do",
+    title: "To-Do",
     description:
       "Our simple to-do app that keeps your current task visible while you work. Especially helpful for those of us with ADHD.",
-    href: "https://digitalhabits.org/tools/redd-todo",
-    githubHref: "https://github.com/ulyngs/redd-todo",
+    href: "https://digitalhabits.org/tools/to-do",
+    githubHref: "https://github.com/ulyngs/digital-habits-to-do",
     logoSrc: "/images/tool-logos/logo-enkelt.svg",
     videoSrc: "/videos/redd-todo.mp4",
   },
@@ -49,7 +49,7 @@ const tools: FocusTool[] = [
     description:
       "Our simple and secure browser extension that lets you use your computer for 2FA. Keep your phone out of sight, out of mind.",
     href: "https://digitalhabits.org/tools/phone-free-2fa",
-    githubHref: "https://github.com/ulyngs/redd-phone-free-2fa",
+    githubHref: "https://github.com/ulyngs/phone-free-2fa",
     logoSrc: "/images/tool-logos/logo-phonefree2fa.svg",
     videoSrc: "/videos/phone-free-2fa.mp4",
   },
@@ -119,7 +119,7 @@ export default function FocusToolsGrid() {
                 alt=""
                 className="h-10 w-10 shrink-0 object-contain"
               />
-              <h3 className="min-w-0 flex-1 truncate font-serif text-xl font-medium text-navy">
+              <h3 className="min-w-0 flex-1 font-serif text-xl font-medium leading-snug text-navy">
                 {tool.title}
               </h3>
             </div>

@@ -51,37 +51,29 @@ export default function Nav() {
           {open ? "Close" : "Menu"}
         </button>
 
-        <div className="hidden items-center gap-6 md:flex">
-          <ul className="flex items-center gap-5">
-            {links.map((link) => {
-              const active = isActive(pathname, link.href);
-              return (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className={`text-sm transition-colors ${
-                      dark
-                        ? active
-                          ? "text-white"
-                          : "text-white/70 hover:text-white"
-                        : active
-                          ? "font-medium text-teal"
-                          : "text-muted hover:text-navy"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-          <a
-            href="mailto:ulrik@digitalhabits.org?subject=Speaking%20enquiry"
-            className="inline-flex h-9 items-center rounded-md bg-teal px-3.5 text-sm font-medium text-white transition hover:bg-teal/90"
-          >
-            Book me to speak
-          </a>
-        </div>
+        <ul className="hidden items-center gap-5 md:flex">
+          {links.map((link) => {
+            const active = isActive(pathname, link.href);
+            return (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={`text-sm transition-colors ${
+                    dark
+                      ? active
+                        ? "text-white"
+                        : "text-white/70 hover:text-white"
+                      : active
+                        ? "font-medium text-teal"
+                        : "text-muted hover:text-navy"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       </nav>
 
       {open && (
@@ -112,14 +104,6 @@ export default function Nav() {
               </li>
             );
           })}
-          <li className="mt-2 px-3 pb-2">
-            <a
-              href="mailto:ulrik@digitalhabits.org?subject=Speaking%20enquiry"
-              className="inline-flex h-9 items-center rounded-md bg-teal px-3.5 text-sm font-medium text-white"
-            >
-              Book me to speak
-            </a>
-          </li>
         </ul>
       )}
     </header>
