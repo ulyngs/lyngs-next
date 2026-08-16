@@ -41,14 +41,28 @@ export default function Nav() {
 
         <button
           type="button"
-          className={`rounded-lg px-3 py-2 text-sm md:hidden ${
+          className={`-mr-2 rounded-lg p-2 md:hidden ${
             dark ? "hover:bg-white/10" : "hover:bg-hoverWash"
           }`}
           aria-expanded={open}
-          aria-label="Toggle menu"
+          aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? "Close" : "Menu"}
+          <svg
+            viewBox="0 0 24 24"
+            className="h-6 w-6"
+            aria-hidden
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.75"
+            strokeLinecap="round"
+          >
+            {open ? (
+              <path d="M6 6l12 12M18 6L6 18" />
+            ) : (
+              <path d="M4 7h16M4 12h16M4 17h16" />
+            )}
+          </svg>
         </button>
 
         <ul className="hidden items-center gap-5 md:flex">

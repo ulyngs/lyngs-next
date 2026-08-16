@@ -1,11 +1,12 @@
 import Link from "next/link";
 import FocusToolsGrid from "@/components/FocusToolsGrid";
+import HomeSectionNav from "@/components/HomeSectionNav";
 import ResearchToolsGrid from "@/components/ResearchToolsGrid";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 
 const jumpCards = [
   {
-    title: "Public speaking",
+    title: "Speaking",
     body: "I give talks and workshops about digital wellbeing and AI at universities, schools, and organisations.",
     href: "#speaking",
   },
@@ -258,9 +259,7 @@ export default function HomePage() {
             className="scroll-mt-8 border-b border-border py-14 md:py-16"
           >
             <div className="grid gap-6 md:grid-cols-[7.5rem_1fr] md:gap-10">
-              <p className="text-[13px] font-medium tracking-wide text-muted">
-                01 — Speaking
-              </p>
+              <HomeSectionNav />
               <div className="min-w-0">
                 <h2 className="font-serif text-2xl font-medium tracking-tight text-navy md:text-[1.75rem]">
                   Talks & workshops on digital wellbeing and AI
@@ -322,8 +321,8 @@ export default function HomePage() {
             className="scroll-mt-8 border-b border-border py-14 md:py-16"
           >
             <div className="grid gap-6 md:grid-cols-[7.5rem_1fr] md:gap-10">
-              <p className="text-[13px] font-medium tracking-wide text-muted">
-                02 — Research
+              <p className="text-[13px] font-medium tracking-wide text-muted md:invisible">
+                Research
               </p>
               <div>
                 <h2 className="font-serif text-2xl font-medium tracking-tight text-navy md:text-[1.75rem]">
@@ -408,8 +407,8 @@ export default function HomePage() {
           {/* 03 Toolbox */}
           <section id="toolbox" className="scroll-mt-8 py-14 md:py-16">
             <div className="grid gap-6 md:grid-cols-[7.5rem_1fr] md:gap-10">
-              <p className="text-[13px] font-medium tracking-wide text-muted">
-                03 — Toolbox
+              <p className="text-[13px] font-medium tracking-wide text-muted md:invisible">
+                Digital tools
               </p>
               <div>
                 <h2 className="font-serif text-2xl font-medium tracking-tight text-navy md:text-[1.75rem]">
