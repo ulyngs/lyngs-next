@@ -8,6 +8,7 @@ import { getCvByType } from "@/lib/cv";
 export const metadata: Metadata = {
   title: "CV",
   description: "Curriculum vitae of Ulrik Lyngs.",
+  alternates: { canonical: "/cv/" },
 };
 
 const toc: TocItem[] = [

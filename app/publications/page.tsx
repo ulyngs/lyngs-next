@@ -6,6 +6,7 @@ import { getPublicationsByYear } from "@/lib/publications";
 export const metadata: Metadata = {
   title: "Publications",
   description: "Academic publications by Ulrik Lyngs.",
+  alternates: { canonical: "/publications/" },
 };
 
 export default function PublicationsPage() {

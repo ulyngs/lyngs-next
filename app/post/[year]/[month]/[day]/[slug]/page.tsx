@@ -5,9 +5,11 @@ import {
   formatPostDate,
   getAllPostParams,
   getPostByParams,
+  plainText,
   postPath,
 } from "@/lib/posts";
 import { markdownToHtml } from "@/lib/markdown";
+import JsonLd from "@/components/JsonLd";
 
 type Params = {
   year: string;
@@ -28,9 +30,22 @@ export async function generateMetadata({
   const { year, month, day, slug } = await params;
   const post = getPostByParams(year, month, day, slug);
   if (!post) return { title: "Post not found" };
+  const description = plainText(post.description) || undefined;
   return {
     title: post.title,
-    description: post.description.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1"),
+    description,
+    alternates: { canonical: postPath(post) },
+    openGraph: {
+      type: "article",
+      siteName: "Ulrik Lyngs",
+      locale: "en_GB",
+      title: post.title,
+      description,
+      url: postPath(post),
+      publishedTime: post.date,
+      // Posts with a teaser get their own card image; the rest fall back to the site image.
+      images: [post.teaser ?? "/opengraph-image.png"],
+    },
   };
 }
 
@@ -45,11 +60,28 @@ export default async function PostPage({
 
   const [descriptionHtml, bodyHtml] = await Promise.all([
     post.description ? markdownToHtml(post.description) : Promise.resolve(""),
-    markdownToHtml(post.content),
+    markdownToHtml(post.content, { demote: true }),
   ]);
+
+  const url = `https://ulriklyngs.com${postPath(post)}`;
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: plainText(post.description),
+    datePublished: post.date,
+    author: { "@type": "Person", name: post.author || "Ulrik Lyngs", url: "https://ulriklyngs.com" },
+    publisher: { "@type": "Person", name: "Ulrik Lyngs", url: "https://ulriklyngs.com" },
+    mainEntityOfPage: url,
+    url,
+    ...(post.categories.length > 0 && { keywords: post.categories.join(", ") }),
+    ...(post.teaser && { image: `https://ulriklyngs.com${post.teaser}` }),
+  };
 
   return (
     <article className="mx-auto max-w-3xl px-4 py-12 md:px-6 md:py-16">
+      <JsonLd data={schema} />
+
       <Link href="/blog/" className="text-sm text-teal hover:underline">
         ← Blog
       </Link>

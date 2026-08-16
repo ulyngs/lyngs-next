@@ -5,20 +5,14 @@ import {
   formatPostDate,
   getAllCategories,
   getAllPosts,
+  plainText,
   postPath,
 } from "@/lib/posts";
-
-function plainText(markdown: string) {
-  return markdown
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
-    .replace(/[*_`]/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
-}
 
 export const metadata: Metadata = {
   title: "Blog",
   description: "Writing by Ulrik Lyngs on research, tools, and digital self-control.",
+  alternates: { canonical: "/blog/" },
 };
 
 export default function BlogPage() {

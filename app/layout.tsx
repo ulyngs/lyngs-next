@@ -32,19 +32,14 @@ export const metadata: Metadata = {
   description:
     "Personal website of Ulrik Lyngs — research, talks, and open-source tools for digital wellbeing. Co-founder of the Centre for Digital Habits.",
   metadataBase: new URL("https://ulriklyngs.com"),
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     siteName: "Ulrik Lyngs",
-    url: "https://ulriklyngs.com",
-    title: "Ulrik Lyngs",
-    description:
-      "Research, talks, and open-source tools for digital wellbeing. Co-founder of the Centre for Digital Habits.",
+    locale: "en_GB",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Ulrik Lyngs",
-    description:
-      "Research, talks, and open-source tools for digital wellbeing. Co-founder of the Centre for Digital Habits.",
   },
 };
 

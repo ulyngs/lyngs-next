@@ -1,6 +1,7 @@
 import Link from "next/link";
 import FocusToolsGrid from "@/components/FocusToolsGrid";
 import HomeSectionNav from "@/components/HomeSectionNav";
+import JsonLd from "@/components/JsonLd";
 import ResearchToolsGrid from "@/components/ResearchToolsGrid";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 
@@ -149,9 +150,38 @@ const personalProjects = [
   },
 ];
 
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Ulrik Lyngs",
+  url: "https://ulriklyngs.com",
+  image: "https://ulriklyngs.com/images/grad_headshot3.jpeg",
+  email: "mailto:ulrik@digitalhabits.org",
+  jobTitle: "Research Fellow",
+  description:
+    "Researcher and developer working on digital wellbeing, attention, and self-control. Co-founder of the Centre for Digital Habits.",
+  affiliation: [
+    { "@type": "Organization", name: "Centre for Digital Habits", url: "https://digitalhabits.org" },
+    { "@type": "CollegeOrUniversity", name: "Linacre College, University of Oxford", url: "https://www.linacre.ox.ac.uk" },
+  ],
+  knowsAbout: [
+    "Human-computer interaction",
+    "Digital wellbeing",
+    "Digital self-control",
+    "Attention",
+  ],
+  sameAs: [
+    "https://scholar.google.co.uk/citations?user=e8XDAzcAAAAJ&hl=en",
+    "https://www.linkedin.com/in/ulrik-lyngs",
+    "https://github.com/ulyngs",
+  ],
+};
+
 export default function HomePage() {
   return (
     <>
+      <JsonLd data={personSchema} />
+
       {/* Hero */}
       <section className="bg-navy text-white">
         <div className="mx-auto max-w-5xl px-5 pb-14 pt-6 md:px-8 md:pb-16 md:pt-10">

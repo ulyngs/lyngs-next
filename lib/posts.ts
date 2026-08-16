@@ -173,3 +173,12 @@ export function getAllCategories(): { name: string; count: number }[] {
 export function postPath(post: Pick<PostMeta, "year" | "month" | "day" | "slug">) {
   return `/post/${post.year}/${post.month}/${post.day}/${post.slug}/`;
 }
+
+/** Strip markdown and collapse whitespace, for meta tags and list summaries. */
+export function plainText(markdown: string): string {
+  return markdown
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/[*_`]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
