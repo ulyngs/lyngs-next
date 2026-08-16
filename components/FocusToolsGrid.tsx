@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 type FocusTool = {
@@ -78,11 +79,13 @@ function DemoVideo({ src, title }: { src: string; title: string }) {
             className="group relative block h-full w-full overflow-hidden p-0 leading-none"
             aria-label={`Play demo: ${title}`}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               className="pointer-events-none h-full w-full object-contain"
               src={posterSrc}
               alt=""
+              width={1920}
+              height={1080}
+              sizes="(min-width: 1024px) 560px, (min-width: 768px) 60vw, 100vw"
             />
             <span className="absolute inset-0 bg-navy/10 transition group-hover:bg-navy/20" />
             <span className="absolute inset-0 flex items-center justify-center">

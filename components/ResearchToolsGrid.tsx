@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 type ResearchTool = {
   id: string;
   title: string;
@@ -97,13 +99,14 @@ export default function ResearchToolsGrid() {
             href={tool.href}
             target="_blank"
             rel="noreferrer"
-            className="mt-4 block overflow-hidden rounded-lg border border-border"
+            className="relative mt-4 block aspect-[16/10] overflow-hidden rounded-lg border border-border"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={tool.imageSrc}
-              alt=""
-              className="aspect-[16/10] w-full object-cover object-top"
+              alt={`Screenshot of ${tool.title}`}
+              fill
+              sizes="(min-width: 1024px) 220px, (min-width: 640px) 30vw, 100vw"
+              className="object-cover object-top"
             />
           </a>
         </div>

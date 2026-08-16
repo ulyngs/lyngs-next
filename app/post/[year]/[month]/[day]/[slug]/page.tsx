@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -9,6 +10,7 @@ import {
   postPath,
 } from "@/lib/posts";
 import { markdownToHtml } from "@/lib/markdown";
+import { imageSize } from "@/lib/image-size";
 import JsonLd from "@/components/JsonLd";
 
 type Params = {
@@ -60,9 +62,10 @@ export default async function PostPage({
 
   const [descriptionHtml, bodyHtml] = await Promise.all([
     post.description ? markdownToHtml(post.description) : Promise.resolve(""),
-    markdownToHtml(post.content, { demote: true }),
+    markdownToHtml(post.content, { postBody: true }),
   ]);
 
+  const teaserSize = post.teaser ? imageSize(post.teaser) : null;
   const url = `https://ulriklyngs.com${postPath(post)}`;
   const schema = {
     "@context": "https://schema.org",
@@ -111,9 +114,16 @@ export default async function PostPage({
         )}
       </header>
 
-      {post.teaser && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img src={post.teaser} alt="" className="mb-10 w-full rounded-2xl" />
+      {post.teaser && teaserSize && (
+        <Image
+          src={post.teaser}
+          alt=""
+          width={teaserSize.width}
+          height={teaserSize.height}
+          sizes="(min-width: 820px) 720px, 100vw"
+          loading="eager"
+          className="mb-10 w-full rounded-2xl"
+        />
       )}
 
       <div

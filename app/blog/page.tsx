@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import {
@@ -36,13 +37,14 @@ export default function BlogPage() {
               {post.teaser ? (
                 <Link
                   href={postPath(post)}
-                  className="block overflow-hidden rounded-xl"
+                  className="relative block aspect-[3/2] overflow-hidden rounded-xl"
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={post.teaser}
                     alt=""
-                    className="aspect-[3/2] w-full object-cover"
+                    fill
+                    sizes="(min-width: 640px) 200px, 100vw"
+                    className="object-cover"
                   />
                 </Link>
               ) : (

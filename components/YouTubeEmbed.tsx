@@ -75,6 +75,9 @@ export default function YouTubeEmbed({
       <img
         src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
         alt=""
+        width={480}
+        height={360}
+        loading="lazy"
         className="absolute inset-0 h-full w-full object-cover transition group-hover:scale-[1.02]"
       />
       <span className="absolute inset-0 bg-navy/15 transition group-hover:bg-navy/25" />

@@ -58,6 +58,8 @@ export default function PublicationItem({ pub }: { pub: Publication }) {
               <img
                 src="/images/ribbon_xs.png"
                 alt=""
+                width={50}
+                height={79}
                 className="h-4 w-auto"
               />
               <span>{pub.award}</span>

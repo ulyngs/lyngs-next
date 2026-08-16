@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import FocusToolsGrid from "@/components/FocusToolsGrid";
 import HomeSectionNav from "@/components/HomeSectionNav";
@@ -186,10 +187,14 @@ export default function HomePage() {
       <section className="bg-navy text-white">
         <div className="mx-auto max-w-5xl px-5 pb-14 pt-6 md:px-8 md:pb-16 md:pt-10">
           <div className="grid items-center gap-8 md:grid-cols-[auto_1fr] md:gap-12">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/images/grad_headshot3.jpeg"
               alt="Photo of Ulrik Lyngs"
+              width={1116}
+              height={1092}
+              sizes="(min-width: 768px) 176px, 144px"
+              loading="eager"
+              fetchPriority="high"
               className="mx-auto h-36 w-36 rounded-full object-cover ring-1 ring-white/20 md:mx-0 md:h-44 md:w-44"
             />
             <div>
@@ -402,6 +407,8 @@ export default function HomePage() {
                                 <img
                                   src="/images/ribbon_xs.png"
                                   alt=""
+                                  width={50}
+                                  height={79}
                                   className="h-3.5 w-auto"
                                 />
                                 Best paper honourable mention (top 5%)
@@ -513,10 +520,12 @@ export default function HomePage() {
                           rel="noreferrer"
                           className="mt-4 block overflow-hidden rounded-lg border border-border"
                         >
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
+                          <Image
                             src={project.imageSrc}
-                            alt=""
+                            alt={`Screenshot of ${project.name}`}
+                            width={1280}
+                            height={800}
+                            sizes="(min-width: 1024px) 220px, (min-width: 640px) 30vw, 100vw"
                             className="aspect-[16/10] w-full object-cover object-top"
                           />
                         </a>
