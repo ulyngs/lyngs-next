@@ -27,20 +27,20 @@ const toc: TocItem[] = [
     ],
   },
   {
+    id: "technical",
+    label: "Technical",
+    children: [
+      { id: "skills", label: "Skills" },
+      { id: "apps", label: "Apps" },
+      { id: "r-packages", label: "R packages" },
+    ],
+  },
+  {
     id: "work",
     label: "Work",
     children: [
       { id: "employments", label: "Employments" },
       { id: "development", label: "Development" },
-    ],
-  },
-  {
-    id: "technical",
-    label: "Technical",
-    children: [
-      { id: "skills", label: "Skills" },
-      { id: "r-packages", label: "R packages" },
-      { id: "apps", label: "Apps" },
     ],
   },
   {
@@ -116,10 +116,10 @@ export default function CvPage() {
             </p>
           </div>
           <a
-            href="/pdfs/academic_cv.pdf"
+            href="/pdfs/ulrik-2-page-cv.pdf"
             className="mt-6 inline-flex h-11 items-center rounded-xl bg-teal px-6 text-sm font-medium text-white shadow-sm transition hover:bg-teal/90"
           >
-            Download academic CV (PDF)
+            Download CV (PDF)
           </a>
 
           <CvDomain id="academia">Academia</CvDomain>
@@ -149,6 +149,17 @@ export default function CvPage() {
           <CvHeading id="service">Service</CvHeading>
           <CvEntryList entries={service} />
 
+          <CvDomain id="technical">Technical</CvDomain>
+
+          <CvHeading id="skills">Skills</CvHeading>
+          <CvEntryList entries={technical} yearKey="yearBegin" />
+
+          <CvHeading id="apps">Apps</CvHeading>
+          <CvEntryList entries={apps} />
+
+          <CvHeading id="r-packages">R packages</CvHeading>
+          <CvEntryList entries={rPackages} />
+
           <CvDomain id="work">Work</CvDomain>
 
           <CvHeading id="employments">Selected employments</CvHeading>
@@ -156,17 +167,6 @@ export default function CvPage() {
 
           <CvHeading id="development">Professional development</CvHeading>
           <CvEntryList entries={profDev} yearKey="yearBegin" />
-
-          <CvDomain id="technical">Technical</CvDomain>
-
-          <CvHeading id="skills">Skills</CvHeading>
-          <CvEntryList entries={technical} yearKey="yearBegin" />
-
-          <CvHeading id="r-packages">R packages</CvHeading>
-          <CvEntryList entries={rPackages} />
-
-          <CvHeading id="apps">Apps</CvHeading>
-          <CvEntryList entries={apps} />
 
           <CvDomain id="personal">Personal</CvDomain>
 

@@ -232,7 +232,7 @@ export function CvDomain({
   return (
     <h2
       id={id}
-      className="mt-14 mb-2 scroll-mt-24 font-serif text-3xl font-semibold text-navy first:mt-0"
+      className="mt-14 mb-0 scroll-mt-24 font-serif text-3xl font-semibold text-navy first:mt-0 [&+h3]:mt-3"
     >
       {children}
     </h2>

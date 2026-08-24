@@ -26,12 +26,17 @@ function parseEmbed(embed: string): { videoId: string | null; start: number | nu
 export default function YouTubeEmbed({
   embed,
   title,
+  poster,
 }: {
   embed: string;
   title: string;
+  poster?: string;
 }) {
   const [playing, setPlaying] = useState(false);
   const { videoId, start } = parseEmbed(embed);
+  const posterSrc =
+    poster ??
+    (videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : null);
 
   if (!videoId) {
     return (
@@ -73,10 +78,10 @@ export default function YouTubeEmbed({
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={`https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`}
+        src={posterSrc ?? undefined}
         alt=""
-        width={480}
-        height={360}
+        width={poster ? 1600 : 480}
+        height={poster ? 897 : 360}
         loading="lazy"
         className="absolute inset-0 h-full w-full object-cover transition group-hover:scale-[1.02]"
       />

@@ -84,6 +84,7 @@ const featuredTalks = [
     embed: "https://www.youtube.com/embed/QClOST9hIG4?start=502",
     title: "Attention, Freedom, Digital Addiction and Dating Apps",
     venue: "Barnes Philosophy Club, London · 2023",
+    poster: "/images/talk-barnes-philosophy.jpg",
   },
 ];
 
@@ -316,7 +317,11 @@ export default function HomePage() {
                         key={talk.embed}
                         className="overflow-hidden rounded-xl border border-border bg-white"
                       >
-                        <YouTubeEmbed embed={talk.embed} title={talk.title} />
+                        <YouTubeEmbed
+                          embed={talk.embed}
+                          title={talk.title}
+                          poster={talk.poster}
+                        />
                         <div className="px-4 py-3.5">
                           <p className="font-serif text-[15px] font-medium leading-snug text-navy">
                             {talk.title}
