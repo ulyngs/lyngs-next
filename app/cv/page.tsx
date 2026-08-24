@@ -71,10 +71,7 @@ export default function CvPage() {
 
   return (
     <div className="mx-auto max-w-5xl px-5 pt-8 pb-12 md:px-8 md:pt-10 md:pb-16">
-      <PageHeader
-        title="Curriculum vitae"
-        description="Academic positions, education, awards, teaching, and more."
-      />
+      <PageHeader title="Curriculum vitae" />
 
       <div className="grid gap-10 lg:grid-cols-[180px_1fr]">
         <aside className="lg:sticky lg:top-24 lg:self-start">

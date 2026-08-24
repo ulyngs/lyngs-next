@@ -7,10 +7,13 @@ type FocusTool = {
   id: string;
   title: string;
   description: string;
-  href: string;
-  githubHref: string;
+  href?: string;
+  githubHref?: string;
   logoSrc: string;
-  videoSrc: string;
+  logoScale?: string;
+  videoSrc?: string;
+  stillSrc?: string;
+  stillInsetSrc?: string;
 };
 
 const tools: FocusTool[] = [
@@ -41,7 +44,8 @@ const tools: FocusTool[] = [
       "Our simple to-do app that keeps your current task visible while you work. Especially helpful for those of us with ADHD.",
     href: "https://digitalhabits.org/tools/to-do",
     githubHref: "https://github.com/ulyngs/digital-habits-to-do",
-    logoSrc: "/images/tool-logos/logo-enkelt.svg",
+    logoSrc: "/images/tool-logos/logo-enkelt-no-bg.svg",
+    logoScale: "scale-105",
     videoSrc: "/videos/redd-todo.mp4",
   },
   {
@@ -51,8 +55,19 @@ const tools: FocusTool[] = [
       "Our simple and secure browser extension that lets you use your computer for 2FA. Keep your phone out of sight, out of mind.",
     href: "https://digitalhabits.org/tools/phone-free-2fa",
     githubHref: "https://github.com/ulyngs/phone-free-2fa",
-    logoSrc: "/images/tool-logos/logo-phonefree2fa.svg",
+    logoSrc: "/images/tool-logos/logo-phonefree2fa-no-bg.svg",
+    logoScale: "scale-90",
     videoSrc: "/videos/phone-free-2fa.mp4",
+  },
+  {
+    id: "mail",
+    title: "Mail",
+    description:
+      "For everyone who's quietly given up on email. Our minimalistic client that shows email threads as chats and lets you focus on one thing at a time.",
+    githubHref: "https://github.com/ulyngs/digital-habits-mail",
+    logoSrc: "/images/tool-logos/logo-dh-mail-no-bg.svg",
+    stillSrc: "/images/tool-screenshots/mail-inbox.png",
+    stillInsetSrc: "/images/tool-screenshots/mail-popout.png",
   },
 ];
 
@@ -61,7 +76,7 @@ function DemoVideo({ src, title }: { src: string; title: string }) {
   const posterSrc = src.replace(/\.mp4$/, "-poster.jpg");
 
   return (
-    <div className="overflow-hidden rounded-lg border border-border bg-warmGrey">
+    <div className="overflow-hidden rounded-lg border border-border bg-white">
       <div className="aspect-video">
         {playing ? (
           <video
@@ -106,6 +121,39 @@ function DemoVideo({ src, title }: { src: string; title: string }) {
   );
 }
 
+function StillPreview({
+  src,
+  insetSrc,
+  title,
+}: {
+  src: string;
+  insetSrc?: string;
+  title: string;
+}) {
+  return (
+    <div className="relative overflow-hidden rounded-lg border border-border bg-white">
+      <div className="relative aspect-video">
+        <Image
+          src={src}
+          alt={`Screenshot of ${title}`}
+          fill
+          sizes="(min-width: 1024px) 560px, (min-width: 768px) 60vw, 100vw"
+          className="object-cover object-top"
+        />
+        {insetSrc && (
+          <Image
+            src={insetSrc}
+            alt=""
+            width={433}
+            height={700}
+            className="absolute right-3 bottom-3 h-auto w-[22%] rounded-xl border border-border shadow-[0_10px_24px_-8px_rgba(0,0,0,0.35)]"
+          />
+        )}
+      </div>
+    </div>
+  );
+}
+
 export default function FocusToolsGrid() {
   return (
     <div className="mt-8 grid grid-cols-1 items-start gap-4">
@@ -116,41 +164,57 @@ export default function FocusToolsGrid() {
         >
           <div className="min-w-0">
             <div className="mb-1 flex min-w-0 items-center gap-3">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={tool.logoSrc}
-                alt=""
-                className="h-10 w-10 shrink-0 object-contain"
-              />
+              <div className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[22%] bg-creamDark p-1.5 shadow-sm ring-1 ring-black/5">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={tool.logoSrc}
+                  alt=""
+                  className={`h-full w-full object-contain ${tool.logoScale ?? ""}`}
+                />
+              </div>
               <h3 className="min-w-0 flex-1 font-serif text-xl font-medium leading-snug text-navy">
                 {tool.title}
               </h3>
             </div>
-            <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-              <a
-                href={tool.href}
-                target="_blank"
-                rel="noreferrer"
-                className="text-teal hover:underline"
-              >
-                Open
-              </a>
-              <a
-                href={tool.githubHref}
-                target="_blank"
-                rel="noreferrer"
-                className="text-teal hover:underline"
-              >
-                GitHub
-              </a>
-            </div>
+            {(tool.href || tool.githubHref) && (
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+                {tool.href && (
+                  <a
+                    href={tool.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-teal hover:underline"
+                  >
+                    Open
+                  </a>
+                )}
+                {tool.githubHref && (
+                  <a
+                    href={tool.githubHref}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-teal hover:underline"
+                  >
+                    GitHub
+                  </a>
+                )}
+              </div>
+            )}
 
-            <p className="text-sm leading-relaxed text-muted">
+            <p className="mt-3 text-sm leading-relaxed text-muted">
               {tool.description}
             </p>
           </div>
 
-          <DemoVideo src={tool.videoSrc} title={tool.title} />
+          {tool.videoSrc ? (
+            <DemoVideo src={tool.videoSrc} title={tool.title} />
+          ) : tool.stillSrc ? (
+            <StillPreview
+              src={tool.stillSrc}
+              insetSrc={tool.stillInsetSrc}
+              title={tool.title}
+            />
+          ) : null}
         </div>
       ))}
     </div>

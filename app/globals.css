@@ -18,6 +18,7 @@
   --color-background: var(--cream);
   --color-foreground: var(--foreground);
   --color-cream: var(--cream);
+  --color-creamDark: #f1eeea;
   --color-navy: var(--navy);
   --color-navyMid: var(--navy-mid);
   --color-navyCard: var(--navy-card);
