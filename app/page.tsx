@@ -15,7 +15,7 @@ const jumpCards = [
   {
     title: "Research",
     body: "I have done a decade of research on why we get distracted on digital devices, and what to do about it.",
-    href: "/publications/",
+    href: "#research",
   },
   {
     title: "Digital tools",
